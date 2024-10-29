@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" class="form-control" />
+    <button class="btn btn-outline-primary mt-2">Yükle</button>
+</form>
+

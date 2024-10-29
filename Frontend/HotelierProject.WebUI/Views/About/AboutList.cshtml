@@ -1,0 +1,34 @@
+﻿@model List<ResultAboutDto>
+@{
+    ViewData["Title"] = "AboutList";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    
+}
+
+<h4>Hakkımızda</h4>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Başlık 1</th>
+        <th>Başlık 2</th>
+        <th>Açıklama</th>
+        <th>Toplam Oda</th>
+        <th>Toplam Çalışan</th>
+        <th>Toplam Müşteri</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        
+        <tr>
+            <th>@item.AboutId</th>
+            <td>@item.Title1</td>
+            <td>@item.Title2</td>
+            <td>@item.Content</td>
+            <td>@item.RoomCount</td>
+            <td>@item.StaffCount</td>
+            <td>@item.CustomerCount</td>
+            <td><a href="/About/UpdateAbout/@item.AboutId" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>

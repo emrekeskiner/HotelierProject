@@ -1,0 +1,34 @@
+﻿@model ApiExchangeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-5">
+    <h2>Döviz Bilgileri</h2>
+
+    <div class="mb-4">
+        <p><strong>Tarih:</strong> @Model.base_currency_date</p>
+        <p><strong>Temel Döviz:</strong> @Model.base_currency</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Döviz</th>
+                    <th>Alış Kuru</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rate in Model.exchange_rates)
+                {
+                    <tr>
+                        <td>@rate.currency</td>
+                        <td>@rate.exchange_rate_buy</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

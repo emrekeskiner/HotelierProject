@@ -1,0 +1,20 @@
+﻿@model HotelierProject.WebUI.Dtos.ServiceDto.CreateServiceDto
+@{
+    ViewData["Title"] = "AddService";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+<h3>Hizmet Ekle</h3>
+<form method="post">
+    <label>Hizmet Adı</label>
+    <input type="text" asp-for="Title" class="form-control mb-2" required>
+
+    <label>Icon</label>
+    <input type="text" asp-for="ServiceIcon" class="form-control mb-2" required>
+
+    <label>Açıklama</label>
+    <input type="text" asp-for="Description" class="form-control mb-2">
+
+    <button class="btn btn-primary mt-2">Kaydet</button>
+
+</form>
+

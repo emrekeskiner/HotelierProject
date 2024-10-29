@@ -1,0 +1,41 @@
+﻿@model List<ResultRoomDto>
+@{
+    ViewData["Title"] = "RoomList";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<h4>Oda Listesi</h4>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Oda Numarası</th>
+        <th>Kapak Resmi</th>
+        <th>Fiyat</th>
+        <th>Başlık</th>
+        <th>Yatak Sayısı</th>
+        <th>Banyo Sayısı</th>
+        <th>Wi-Fi</th>
+        <th>Açıklama</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td>@item.RoomNumber</td>
+            <td><img src="/../../@item.RoomCoverImage" alt="Oda Kapak Resmi" style="width:100px;height:auto;"></td>
+            <td>@item.Price ₺</td>
+            <td>@item.Title</td>
+            <td>@item.BedCount</td>
+            <td>@item.BathCount</td>
+            <td>@item.Wifi</td>
+            <td>@item.Description</td>
+            <td><a href="/Room/DeleteRoom/@item.RoomId" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Room/UpdateRoom/@item.RoomId" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Room/AddRoom" class="btn btn-info">Yeni Oda Ekle</a>

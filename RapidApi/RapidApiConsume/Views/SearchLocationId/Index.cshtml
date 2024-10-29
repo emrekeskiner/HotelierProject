@@ -1,0 +1,35 @@
+﻿@model List<ApiBookingLocationSearchViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-5">
+    <h2>Lokasyon Id</h2>
+    <div class="table-responsive">
+        @using (Html.BeginForm("Index", "SearchLocationId", FormMethod.Post))
+        {
+            <label>Şehir Adını Giriniz</label>
+            <input type="text" class="form-control mt-2 mb-2" name="cityName"/>
+            
+            <button class="btn btn-primary mb-4">ID Ara</button>
+        }
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Lokasyon</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                    <td>@item.dest_id</td>
+                        <td><a href="/BookingByCity/Index?cityId=@item.dest_id" class="btn btn-dark">Yeni Otel Rezervasyon Bilgisi</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+    
+</div>

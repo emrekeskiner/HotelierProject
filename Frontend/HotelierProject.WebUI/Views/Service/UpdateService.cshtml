@@ -1,0 +1,22 @@
+﻿@model HotelierProject.WebUI.Dtos.ServiceDto.UpdateServiceDto
+@{
+    ViewData["Title"] = "UpdateService";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<h3>Hizmet Güncelle</h3>
+<form method="post">
+    <input type="hidden" asp-for="ServiceId" />
+    <label>Hizmet Adı</label>
+    <input type="text" asp-for="Title" class="form-control mb-2" required>
+
+    <label>Icon</label>
+    <input type="text" asp-for="ServiceIcon" class="form-control mb-2" required>
+
+    <label>Açıklama</label>
+    <input type="text" asp-for="Description" class="form-control mb-2">
+
+    <button class="btn btn-primary mt-2">Güncelle</button>
+
+</form>
+

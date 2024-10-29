@@ -1,0 +1,52 @@
+﻿@model List<ApiBookingViewModel.Result>
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+
+<div class="container mt-5">
+    <h2>Booking Oteller</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Ad</th>
+                    <th>Fotoğraf</th>
+                    <th>Puan</th>
+                    <th>İnceleme Sayısı</th>
+                    <th>Para Birimi</th>
+                    <th>Giriş Tarihi</th>
+                    <th>Çıkış Tarihi</th>
+                    <th>Özellikler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td>@count</td>
+                        <td>@item.id</td>
+                        <td>@item.name</td>
+                        <td>
+                            <img src="@item.photoMainUrl" alt="@item.name" class="img-fluid" style="max-width: 100px;" />
+                        </td>
+                        <td>@item.reviewScore (@item.reviewScoreWord)</td>
+                        <td>@item.reviewCount</td>
+                        <td>@item.currency</td>
+                        <td>@item.checkinDate</td>
+                        <td>@item.checkoutDate</td>
+                        <td>
+                            <span>Kalite: @item.qualityClass</span><br />
+                            <span>Özellik Sınıfı: @item.propertyClass</span><br />
+                            <span>Tür: @item.propertyType</span><br />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

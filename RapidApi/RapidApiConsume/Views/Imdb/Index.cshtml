@@ -1,0 +1,52 @@
+﻿@model List<ApiMovieViewModel>
+@{
+    ViewData["Title"] = "Film Listesi";
+}
+
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Rank</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Genre</th>
+                    <th>Rating</th>
+                    <th>Year</th>
+                    <th>IMDB ID</th>
+                    <th>IMDB Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.rank</td>
+                        <td>@item.title</td>
+                        <td>@item.description</td>
+                        <td>
+                            <img src="@item.image" alt="@item.title" class="img-fluid" style="max-width: 100px;" />
+                        </td>
+                       
+                        <td>
+                            @foreach (var genre in item.genre)
+                            {
+                                <span>@genre</span>
+                            }
+                        </td>
+                        <td>@item.rating</td>
+                        <td>@item.year</td>
+                        <td>@item.imdbid</td>
+                        <td>
+                            <a href="@item.imdb_link" target="_blank" class="btn btn-primary btn-sm">IMDB</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

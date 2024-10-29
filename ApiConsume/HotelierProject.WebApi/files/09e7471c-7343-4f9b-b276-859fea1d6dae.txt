@@ -1,0 +1,6 @@
+Data Source=ultrabook;Initial Catalog=PersonelVeritabani;Integrated Security=True
+
+Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\Kitaplik.mdb
+
+1- Enable-Migrations
+2 - update-database (-Force) eklenirse baglılıkları görmezden gelip update ediyor

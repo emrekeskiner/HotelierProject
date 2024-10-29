@@ -1,0 +1,27 @@
+﻿@model UpdateStaffViewModel
+@{
+    ViewData["Title"] = "Çalışan Güncelle";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="StaffId" />
+    <label>Personel Adı</label>
+    <input type="text" id="name" asp-for="Name" class="form-control mb-2" required>
+
+    <label for="title">Personel Ünvanı</label>
+    <input type="text" id="title" asp-for="Title" class="form-control mb-2" required>
+
+    <label for="socialMedia">Facebook</label>
+    <input type="text" id="socialMedia" asp-for="SocialMedia" class="form-control mb-2">
+
+    <label for="socialMedia1">Instagram</label>
+    <input type="text" id="socialMedia1" asp-for="SocialMedia1" class="form-control mb-2">
+
+    <label for="socialMedia2">Linkedin</label>
+    <input type="text" id="socialMedia2" asp-for="SocialMedia2" class="form-control mb-2">
+
+    <button class="btn btn-primary mt-2">Güncelle</button>
+
+</form>
+

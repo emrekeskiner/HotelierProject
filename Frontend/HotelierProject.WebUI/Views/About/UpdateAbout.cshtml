@@ -1,0 +1,29 @@
+﻿@using HotelierProject.WebUI.Dtos.AboutDto
+@model UpdateAboutDto
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+<h4>Hakkımızda Güncelle</h4>
+<form method="post">
+    <input type="hidden" asp-for="AboutId" />
+    <label>Başlık 1</label>
+    <input type="text" asp-for="Title1" class="form-control mb-2" required>
+
+    <label>Başlık 2</label>
+    <input type="text" asp-for="Title2" class="form-control mb-2" required>
+
+    <label>Açıklama</label>
+    <input type="text" asp-for="Content" class="form-control mb-2" required>
+
+    <label>Toplam Oda Sayısı</label>
+    <input type="text" asp-for="RoomCount" class="form-control mb-2">
+    <label>Toplam Çalışan Sayısı</label>
+    <input type="text" asp-for="StaffCount" class="form-control mb-2">
+    <label>Toplam Müşteri Sayısı</label>
+    <input type="text" asp-for="CustomerCount" class="form-control mb-2">
+
+    <button class="btn btn-primary mt-2">Güncelle</button>
+
+</form>
+

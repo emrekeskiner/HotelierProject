@@ -1,0 +1,51 @@
+﻿@model List<ResultSendMessageDto>
+@{
+    ViewData["Title"] = "Sendbox";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Giden Mesajlar</h4>
+            @await Html.PartialAsync("/Views/AdminContact/SidebarAdminContactPartial.cshtml")
+            <div class="email-right-box">
+
+                <div class="email-list m-t-15 mt-5">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="message">
+                            <a href="/AdminContact/MessageDetails/@item.SendMessageId">
+                                <div class="col-mail col-mail-1">
+                                    <div class="email-checkbox">
+                                        <input type="checkbox" id="chk19">
+                                        <label class="toggle" for="chk19"></label>
+                                    </div><span class="star-toggle ti-star"></span>
+                                </div>
+                                <div class="col-mail col-mail-2">
+                                    <div class="subject">
+                                        Alıcı : @item.ReceiverMail
+                                        |
+                                        <b>Konu : @item.Title</b>
+                                        | İçerik : @if (item.Content.Length > 100)
+                                        {
+                                            @item.Content.Substring(0, 100)
+                                        }else{
+                                            @item.Content
+                                        }
+                                    </div>
+                                    <div class="date">@item.Date.ToString("dd.MMM.yyyy")</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
