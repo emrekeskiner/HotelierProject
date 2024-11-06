@@ -21,12 +21,24 @@ namespace HotelierProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:5115/api/Contact");
-            if (responseMessage.IsSuccessStatusCode)
+            //Contact alanının count değerini almak için 
+            var responseMessageContactCount = await client.GetAsync("http://localhost:5115/api/Contact/GetContactCount");
+            //gönderilen mesajlar toplamı
+            var responseMessageSendMessageCount = await client.GetAsync("http://localhost:5115/api/SendMessage/GetSendMessageCount");
+
+            if (responseMessage.IsSuccessStatusCode && responseMessageContactCount.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);
+
+                var jsonDataContactCount = await responseMessageContactCount.Content.ReadAsStringAsync();
+                ViewBag.contactCount = jsonDataContactCount;
+                var jsonDataSendMessageCount = await responseMessageSendMessageCount.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonDataSendMessageCount;
+
                 return View(values);
             }
+
             return View();
         }
 
@@ -62,10 +74,21 @@ namespace HotelierProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:5115/api/SendMessage");
-            if (responseMessage.IsSuccessStatusCode)
+            //gönderilen mesajlar toplamı
+            var responseMessageSendMessageCount = await client.GetAsync("http://localhost:5115/api/SendMessage/GetSendMessageCount");
+            //gelen mesajlar toplamı 
+            var responseMessageContactCount = await client.GetAsync("http://localhost:5115/api/Contact/GetContactCount");
+            //-------------------
+            if (responseMessage.IsSuccessStatusCode && responseMessageSendMessageCount.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultSendMessageDto>>(jsonData);
+
+                var jsonDataSendMessageCount = await responseMessageSendMessageCount.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonDataSendMessageCount;
+                var jsonDataContactCount = await responseMessageContactCount.Content.ReadAsStringAsync();
+                ViewBag.contactCount = jsonDataContactCount;
+
                 return View(values);
             }
             return View();
@@ -79,6 +102,11 @@ namespace HotelierProject.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultSendMessageDto>>(jsonData);
+
+
+
+
+
                 return View(values);
             }
             return View();
@@ -97,6 +125,20 @@ namespace HotelierProject.WebUI.Controllers
             }
             return View();
         }
-       
+
+        public async Task<IActionResult> GetContactCount()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:5115/api/Contact/GetContactCount");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+               // var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);
+               ViewBag.data = jsonData;
+                return View();
+            }
+            return View();
+        }
+
     }
 }

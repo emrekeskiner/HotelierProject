@@ -2,8 +2,8 @@
 
 namespace HotelierProject.BusinessLayer.Abstract
 {
-    public interface ISendMessageService:IGenericService<SendMessage>
+    public interface IMessageCategoryService:IGenericService<MessageCategory>
     {
-        public int TSendMessageCount();
+
     }
 }

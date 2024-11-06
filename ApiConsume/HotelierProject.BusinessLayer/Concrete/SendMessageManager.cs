@@ -38,6 +38,11 @@ namespace HotelierProject.BusinessLayer.Concrete
             _sendMessageDal.Insert(entity);
         }
 
+        public int TSendMessageCount()
+        {
+            return _sendMessageDal.SendMessageCount();
+        }
+
         public void TUpdate(SendMessage entity)
         {
             _sendMessageDal.Update(entity);
