@@ -28,13 +28,17 @@ namespace HotelierProject.WebUI.Controllers
             {
                 return View();
             }
-
+            newUserDto.WorkLocationId = 1;
             var appUser = new AppUser()
             {
+                
                 Name = newUserDto.Name,
                 Surname = newUserDto.Surname,
                 Email=newUserDto.Mail,
-                UserName=newUserDto.Username
+                City = newUserDto.City,
+                UserName=newUserDto.Username,
+                WorkLocationId=newUserDto.WorkLocationId
+                
             };
             var result = await _userManager.CreateAsync(appUser,newUserDto.Password);
             if (result.Succeeded)

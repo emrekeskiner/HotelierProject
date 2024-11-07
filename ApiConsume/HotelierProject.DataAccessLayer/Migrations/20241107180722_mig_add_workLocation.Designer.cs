@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelierProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241106113159_mig_Add_MessageCategory_Class")]
-    partial class mig_Add_MessageCategory_Class
+    [Migration("20241107180722_mig_add_workLocation")]
+    partial class mig_add_workLocation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,6 +113,9 @@ namespace HotelierProject.DataAccessLayer.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -154,6 +157,12 @@ namespace HotelierProject.DataAccessLayer.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("WorkDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkLocationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -163,6 +172,8 @@ namespace HotelierProject.DataAccessLayer.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("WorkLocationId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -286,7 +297,7 @@ namespace HotelierProject.DataAccessLayer.Migrations
 
                     b.HasKey("MessageCategoryId");
 
-                    b.ToTable("MessageCategory");
+                    b.ToTable("MessageCategories");
                 });
 
             modelBuilder.Entity("HotelierProject.EntityLayer.Concrete.Room", b =>
@@ -474,6 +485,27 @@ namespace HotelierProject.DataAccessLayer.Migrations
                     b.ToTable("Testimonials");
                 });
 
+            modelBuilder.Entity("HotelierProject.EntityLayer.Concrete.WorkLocation", b =>
+                {
+                    b.Property<int>("WorkLocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WorkLocationId"), 1L, 1);
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkLocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WorkLocationId");
+
+                    b.ToTable("WorkLocations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -577,6 +609,17 @@ namespace HotelierProject.DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HotelierProject.EntityLayer.Concrete.AppUser", b =>
+                {
+                    b.HasOne("HotelierProject.EntityLayer.Concrete.WorkLocation", "WorkLocation")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("WorkLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkLocation");
+                });
+
             modelBuilder.Entity("HotelierProject.EntityLayer.Concrete.Contact", b =>
                 {
                     b.HasOne("HotelierProject.EntityLayer.Concrete.MessageCategory", "MessageCategory")
@@ -642,6 +685,11 @@ namespace HotelierProject.DataAccessLayer.Migrations
             modelBuilder.Entity("HotelierProject.EntityLayer.Concrete.MessageCategory", b =>
                 {
                     b.Navigation("Contacts");
+                });
+
+            modelBuilder.Entity("HotelierProject.EntityLayer.Concrete.WorkLocation", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 #pragma warning restore 612, 618
         }

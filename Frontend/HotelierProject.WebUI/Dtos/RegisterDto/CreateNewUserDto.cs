@@ -15,6 +15,8 @@ namespace HotelierProject.WebUI.Dtos.RegisterDto
 
         [Required(ErrorMessage = "Mail Giriniz.")]
         public string Mail { get; set; }
+        [Required(ErrorMessage = "Şehir Giriniz")]
+        public string City { get; set; }
 
         [Required(ErrorMessage = "Şifre Giriniz.")]
         public string Password { get; set; }
@@ -22,6 +24,8 @@ namespace HotelierProject.WebUI.Dtos.RegisterDto
         [Required(ErrorMessage = "Şifreyi tekrar Giriniz.")]
         [Compare("Password",ErrorMessage = "Şifreler uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "Çalışma Yerini Seçin")]
+        public int WorkLocationId { get; set; }
 
     }
 }

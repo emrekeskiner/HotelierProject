@@ -1,0 +1,52 @@
+﻿@model List<ResultAppUserDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int number = 0;
+}
+
+
+
+<table class="table table-xs mb-0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Adı Soyadı</th>
+            <th>Şehir</th>
+            <th>İş yeri</th>
+            <th>İş Yeri İl</th>
+            <th>E-Mail</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+          @foreach (var item in Model)
+    {
+        number++;
+        <tr>
+             <th>@number</th>
+                <td><img src="@item.imageUrl" class=" rounded-circle mr-3" alt="">@item.name @item.surname</td>
+
+            <td>
+                    <span>
+                        @item.city
+                    </span>
+            </td>
+                @if (item.workLocation != null)
+                {
+            <td>@item.workLocation.workLocationName</td>
+            <td>@item.workLocation.cityName</td>
+                }
+            <td>
+               @item.email
+            </td>
+                <td><a href="/AdminUser/DeleteAdminUser/@item.id" class="btn btn-danger">Sil</a>
+                <a href="/AdminUser/UpdateAdminUser/@item.id" class="btn btn-success">Güncelle</a>
+                    <a href="#" class="btn btn-dark">Detaylar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<a href="/Register/Index/" class="btn btn-info mt-2"><i class="icon-user-follow"></i>Yeni Kullanıcı </a>
+   

@@ -16,7 +16,7 @@ namespace HotelierProject.DataAccessLayer.Migrations
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
-                name: "MessageCategory",
+                name: "MessageCategories",
                 columns: table => new
                 {
                     MessageCategoryId = table.Column<int>(type: "int", nullable: false)
@@ -25,7 +25,7 @@ namespace HotelierProject.DataAccessLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MessageCategory", x => x.MessageCategoryId);
+                    table.PrimaryKey("PK_MessageCategories", x => x.MessageCategoryId);
                 });
 
             migrationBuilder.CreateIndex(
@@ -34,10 +34,10 @@ namespace HotelierProject.DataAccessLayer.Migrations
                 column: "MessageCategoryId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Contacts_MessageCategory_MessageCategoryId",
+                name: "FK_Contacts_MessageCategories_MessageCategoryId",
                 table: "Contacts",
                 column: "MessageCategoryId",
-                principalTable: "MessageCategory",
+                principalTable: "MessageCategories",
                 principalColumn: "MessageCategoryId",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -45,11 +45,11 @@ namespace HotelierProject.DataAccessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Contacts_MessageCategory_MessageCategoryId",
+                name: "FK_Contacts_MessageCategories_MessageCategoryId",
                 table: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "MessageCategory");
+                name: "MessageCategories");
 
             migrationBuilder.DropIndex(
                 name: "IX_Contacts_MessageCategoryId",

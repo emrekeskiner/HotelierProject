@@ -4,6 +4,9 @@ using HotelierProject.DataAccessLayer.Abstract;
 using HotelierProject.DataAccessLayer.Concrete;
 using HotelierProject.DataAccessLayer.EntityFramework;
 using System.Reflection;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using HotelierProject.EntityLayer.Concrete;
 
 
 
@@ -48,6 +51,12 @@ builder.Services.AddScoped<ISendMessageService, SendMessageManager>();
 builder.Services.AddScoped<IMessageCategoryDal, EfMessageCategoryDal>();
 builder.Services.AddScoped<IMessageCategoryService, MessageCategoryManager>();
 
+builder.Services.AddScoped<IWorkLocationDal, EfWorkLocationDal>();
+builder.Services.AddScoped<IWorkLocationService, WorkLocationManager>();
+
+builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
+builder.Services.AddScoped<IAppUserService, AppUserManager>();
+
 
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -61,6 +70,11 @@ builder.Services.AddCors(opt =>
     });
 }
     );
+
+
+// JSON verisini serileþtirme
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
