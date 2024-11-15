@@ -13,6 +13,8 @@
             <th>#</th>
             <th>Adı Soyadı</th>
             <th>Şehir</th>
+            <th>Cinsiyet</th>
+            <th>Ülke</th>
             <th>İş yeri</th>
             <th>İş Yeri İl</th>
             <th>E-Mail</th>
@@ -32,6 +34,20 @@
                         @item.city
                     </span>
             </td>
+                @if(item.Gender == "Erkek")
+                {
+                    <td><i class="fa fa-circle-o text-success mr-2"></i>Erkek</td>
+                }else{
+                    <td><i class="fa fa-circle-o text-danger mr-2"></i>Kadın</td>
+                }
+                    
+                   
+                
+                <td>
+                    <span>
+                        @item.Country
+                    </span>
+                </td>
                 @if (item.workLocation != null)
                 {
             <td>@item.workLocation.workLocationName</td>

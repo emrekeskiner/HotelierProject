@@ -10,7 +10,8 @@ namespace HotelierProject.BusinessLayer.Abstract
     public interface IBookingService:IGenericService<Booking>
     {
         void TBookingStatusChange(int id, string status);
+        int TGetBookingCount();
 
-
+        List<Booking> TGetLastSixBookings();
     }
 }

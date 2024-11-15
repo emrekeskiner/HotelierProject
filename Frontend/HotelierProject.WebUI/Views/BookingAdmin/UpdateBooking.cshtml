@@ -1,0 +1,101 @@
+﻿@model UpdateBookingDto
+@{
+    ViewData["Title"] = "UpdateBooking";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+<head>
+    <!-- Custom Stylesheet -->
+    <link href="~/adminweb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="~/adminweb/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="~/adminweb/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="~/adminweb/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="~/adminweb/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="~/adminweb/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+</head>
+<form method="post">
+    <input type="hidden" asp-for="BookingId" />
+    <div class="form-group">
+        <label>Ad, Soyad</label>
+        <input type="text" class="form-control input-default" asp-for="Name" >
+    </div>
+     <div class="form-group">
+        <label>E-Mail</label>
+        <input type="email" class="form-control input-default" asp-for="Mail">
+    </div>
+   
+    <div class="form-group">
+        <label class="m-t-20">Giriş Tarihi</label>
+        <input type="text" class="form-control" id="mdate" asp-for="CheckIn">
+
+    </div>
+    <div class="form-group">
+        <label class="m-t-20">Çıkış Tarihi</label>
+        <input type="text" class="form-control"  id="mdate" asp-for="CheckOut">
+
+    </div>
+    <div class="form-group">
+        <label>Yetişkin Sayısı</label>
+        <select class="form-control" asp-for="AdultCount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Çocuk Sayısı</label>
+        <select class="form-control" asp-for="ChildCount">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Oda Sayısı</label>
+        <select class="form-control" asp-for="RoomCount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+   
+    <div class="form-group">
+        <label>Durumu</label>
+        <select class="form-control" asp-for="Status" >
+            <option value="Onaylandı">Onaylandı</option>
+            <option value="İptal Edildi">İptal Edildi</option>
+            <option value="Bekletildi">Bekletildi</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Özel İstekler</label>
+        <textarea class="form-control h-150px" rows="6" id="comment" asp-for="SpecialRequest" readonly></textarea>
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        <textarea class="form-control h-150px" rows="6" id="comment" asp-for="Description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Güncelle</button>
+</form>
+
+<script src="~/adminweb/plugins/moment/moment.js"></script>
+<script src="~/adminweb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<!-- Clock Plugin JavaScript -->
+<script src="~/adminweb/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+<!-- Color Picker Plugin JavaScript -->
+<script src="~/adminweb/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+<script src="~/adminweb/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+<script src="~/adminweb/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+<!-- Date Picker Plugin JavaScript -->
+<script src="~/adminweb/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<!-- Date range Plugin JavaScript -->
+<script src="~/adminweb/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="~/adminweb/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<script src="~/adminweb/js/plugins-init/form-pickers-init.js"></script>
+<script src="~/adminweb/plugins/jquery/jquery.min.js"></script>

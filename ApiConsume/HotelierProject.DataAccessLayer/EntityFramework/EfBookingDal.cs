@@ -20,11 +20,23 @@ namespace HotelierProject.DataAccessLayer.EntityFramework
         {
             var context = new Context();
            var values = context.Bookings.Find(id);
-            values.Status = status;
+            values!.Status = status;
             context.SaveChanges();
             
         }
 
-      
+        public int GetBookingCount()
+        {
+            using var context = new Context();
+
+            return context.Bookings.Count();
+        }
+
+        public List<Booking> GetLastSixBookings()
+        {
+            using var context = new Context();
+
+            return context.Bookings.OrderByDescending(x=> x.BookingId).Take(6).ToList();
+        }
     }
 }

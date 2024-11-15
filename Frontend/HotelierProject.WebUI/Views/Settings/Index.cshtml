@@ -1,0 +1,39 @@
+﻿@model HotelierProject.WebUI.Models.Settings.UserEditViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="card-body">
+    <h4 class="card-title">Profil bilgileri güncelle</h4>
+    <div class="basic-form">
+        <form method="post">
+            <div class="form-group">
+                <label>Adı</label>
+                <input type="text" asp-for="Name" class="form-control input-rounded">
+            </div>
+            <div class="form-group">
+                <label>Soyadı</label>
+                <input type="text" asp-for="Surname" class="form-control input-rounded">
+            </div>
+            <div class="form-group">
+                <label>Kullanıcı Adınız</label>
+                <input type="text" asp-for="Username" class="form-control input-rounded" readonly>
+            </div>
+            <div class="form-group">
+                <label>E-Mail</label>
+                <input type="text" asp-for="Email" class="form-control input-rounded">
+            </div>
+            <div class="form-group">
+                <label>Şifreniz</label>
+                <input type="password" asp-for="Password" class="form-control input-rounded">
+            </div>
+            <div class="form-group">
+                <label>Şifreniz Tekrar</label>
+                <input type="password" asp-for="ConfirmPassword" class="form-control input-rounded">
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Güncelle</button>
+        </form>
+    </div>
+</div>
+

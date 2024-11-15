@@ -15,5 +15,19 @@ namespace HotelierProject.DataAccessLayer.EntityFramework
         public EfStaffDal(Context context) : base(context)
         {
         }
+
+        public List<Staff> GetLastFourStaffList()
+        {
+           using var context = new Context();
+
+            return context.Staffs.OrderByDescending(s => s.StaffId).Take(4).ToList();
+        }
+
+        public int GetStaffCount()
+        {
+           using var context = new Context();
+
+            return context.Staffs.Count();
+        }
     }
 }

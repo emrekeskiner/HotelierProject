@@ -28,9 +28,19 @@ namespace HotelierProject.BusinessLayer.Concrete
             return _staffDal.GetById(id);
         }
 
+        public List<Staff> TGetLastFourStaffList()
+        {
+           return _staffDal.GetLastFourStaffList();
+        }
+
         public List<Staff> TGetList()
         {
             return _staffDal.GetList();
+        }
+
+        public int TGetStaffCount()
+        {
+            return _staffDal.GetStaffCount();
         }
 
         public void TInsert(Staff entity)
@@ -42,5 +52,7 @@ namespace HotelierProject.BusinessLayer.Concrete
         {
             _staffDal.Update(entity);
         }
+
+    
     }
 }

@@ -9,5 +9,6 @@ namespace HotelierProject.BusinessLayer.Abstract
 {
     public interface IServiceService:IGenericService<Service>
     {
+       
     }
 }

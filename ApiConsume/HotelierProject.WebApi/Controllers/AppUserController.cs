@@ -15,9 +15,16 @@ namespace HotelierProject.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult AppUserList()
+        public IActionResult UserListWithWorkLocation()
         {
             var values = _appUserService.TUserListWithWorkLocation();
+            return Ok(values);
+        }
+
+        [HttpGet("AppUserList")]
+        public IActionResult AppUserList()
+        {
+            var values = _appUserService.TGetList();
             return Ok(values);
         }
     }
