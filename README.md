@@ -47,7 +47,9 @@ Bu proje, bir otelin tanıtımı, rezervasyon yönetimi ve müşteri iletişimi 
 - **DTO (Data Transfer Object)**
 - **AutoMapper**
 - **RapidAPI**
+- **MS-SQL**
 ---
+![Veritabanı](https://raw.githubusercontent.com/emrekeskiner/HotelierProject/refs/heads/master/Frontend/HotelierProject.WebUI/assets/10.png)
 ![Admin Paneli](https://raw.githubusercontent.com/emrekeskiner/HotelierProject/refs/heads/master/Frontend/HotelierProject.WebUI/assets/8.png)
 ![Admin Paneli](https://raw.githubusercontent.com/emrekeskiner/HotelierProject/refs/heads/master/Frontend/HotelierProject.WebUI/assets/4.png)
 ![Admin Paneli](https://raw.githubusercontent.com/emrekeskiner/HotelierProject/refs/heads/master/Frontend/HotelierProject.WebUI/assets/5.png)
