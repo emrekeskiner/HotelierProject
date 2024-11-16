@@ -1,5 +1,8 @@
 ﻿using HotelierProject.WebUI.Dtos.AboutDto;
+using HotelierProject.WebUI.Dtos.BookingDto;
 using HotelierProject.WebUI.Dtos.RoomDto;
+using HotelierProject.WebUI.Services;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -8,24 +11,22 @@ namespace HotelierProject.WebUI.Controllers
 {
     public class RoomController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly CrudServices _crudServices;
 
-        public RoomController(IHttpClientFactory httpClientFactory)
+        public RoomController(CrudServices crudServices)
         {
-            _httpClientFactory = httpClientFactory;
+            _crudServices = crudServices;
         }
 
         public async Task<IActionResult> RoomList()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:5115/api/Room");
-            if (responseMessage.IsSuccessStatusCode)
+            var rooms = await _crudServices.GetList<ResultRoomDto>("Room");
+            if (rooms != null)
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultRoomDto>>(jsonData);
-                return View(values);
+                return View(rooms);
             }
-            return View();
+            return View(new List<ResultRoomDto>());
+            
         }
 
         [HttpGet]
@@ -33,14 +34,13 @@ namespace HotelierProject.WebUI.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddRoom(CreateRoomDto createRoomDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createRoomDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("http://localhost:5115/api/Room", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            var createRoom = await _crudServices.Create(createRoomDto,"Room");
+           
+            if (createRoom)
             {
                 return RedirectToAction("RoomList");
             }
@@ -50,24 +50,19 @@ namespace HotelierProject.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateRoom(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"http://localhost:5115/api/Room/{id}");
-            if (responseMessage.IsSuccessStatusCode)
+            var room = await _crudServices.GetById<UpdateRoomDto>("Room", id);
+           if (room != null)
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateRoomDto>(jsonData);
-                return View(values);
+                return View(room);
             }
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> UpdateRoom(UpdateRoomDto updateRoomDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateRoomDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("http://localhost:5115/api/Room", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            var updateRoom = await _crudServices.Update(updateRoomDto, "Room");
+
+            if (updateRoom)
             {
                 return RedirectToAction("RoomList");
             }
@@ -76,9 +71,9 @@ namespace HotelierProject.WebUI.Controllers
 
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"http://localhost:5115/api/Room/{id}");
-            if (responseMessage.IsSuccessStatusCode)
+            var deleteRoom = await _crudServices.Delete("Room",id);
+            
+            if (deleteRoom)
             {
 
                 return RedirectToAction("RoomList");

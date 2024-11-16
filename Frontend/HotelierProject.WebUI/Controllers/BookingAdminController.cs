@@ -1,4 +1,5 @@
 ﻿using HotelierProject.WebUI.Dtos.BookingDto;
+using HotelierProject.WebUI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -8,23 +9,28 @@ namespace HotelierProject.WebUI.Controllers
     public class BookingAdminController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly CrudServices _crudServices;
 
-        public BookingAdminController(IHttpClientFactory httpClientFactory)
+        public BookingAdminController(IHttpClientFactory httpClientFactory, CrudServices crudServices)
         {
             _httpClientFactory = httpClientFactory;
+            _crudServices = crudServices;
         }
+
 
         public async Task<IActionResult> BookingList()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:5115/api/Booking");
-            if (responseMessage.IsSuccessStatusCode)
+            //Crud Services içerisindeki GetList Metodunu çağırıyoruz ve bookings değişkenine aktarıyoruz
+            var bookings = await _crudServices.GetList<ResultBookingDto>("Booking");
+
+            if (bookings != null)
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultBookingDto>>(jsonData);
-                return View(values);
+                // Eğer bookings null değilse sayfaya değerlerle dönüş sağla 
+                return View(bookings);
             }
-            return View();
+
+            // Eğer hata varsa boş liste döndür.
+            return View(new List<ResultBookingDto>());
         }
 
         public async Task<IActionResult> ChangeReservationStatus(int id, string status)
@@ -42,27 +48,26 @@ namespace HotelierProject.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateBooking(int id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"http://localhost:5115/api/Booking/{id}");
-            if (responseMessage.IsSuccessStatusCode)
+            var booking = await _crudServices.GetById<UpdateBookingDto>("Booking", id);
+            if (booking != null)
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateBookingDto>(jsonData);
-                return View(values);
+                return View(booking);
             }
             return View();
         }
+       
+
         [HttpPost]
+
         public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateBookingDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("http://localhost:5115/api/Booking/UpdateBooking", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            bool isUpdated = await _crudServices.Update(updateBookingDto, "Booking/UpdateBooking");
+
+            if (isUpdated)
             {
                 return RedirectToAction("BookingList", "BookingAdmin");
             }
+
             return View();
         }
     }

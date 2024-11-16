@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using HotelierProject.DataAccessLayer.Concrete;
 using HotelierProject.EntityLayer.Concrete;
 using HotelierProject.WebUI.Dtos.GuestDto;
+using HotelierProject.WebUI.Services;
 using HotelierProject.WebUI.ValidationRules.GuestValidationRules;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -40,6 +41,15 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddHttpClient();
+
+//Api BaseUrl appsetting.json dan api adresini yönetebilmek için.
+var apiBaseUrl = builder.Configuration.GetSection("ApiSettings")["BaseUrl"];
+builder.Services.AddHttpClient<HttpClientService>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+});
+
+builder.Services.AddScoped<CrudServices>();
 
 var app = builder.Build();
 
