@@ -2,7 +2,7 @@
 
 Bu proje, bir otelin tanıtımı, rezervasyon yönetimi ve müşteri iletişimi için **ASP.NET Core** ve **Entity Framework 6** kullanılarak geliştirilmiş bir web uygulamasıdır. Proje geliştirme sürecinde [Murat Yücedağ](https://www.udemy.com/user/murat-yucedag-3/) hocamın **ASP.NET Core Api - Rapid Api ve Api Consume** eğitiminden ilham aldım. Ancak kendi katkılarım ve yeniliklerimle projeyi geliştirdim.
 
-![Proje Görseli](https://via.placeholder.com/1200x400.png?text=Otel+Rezervasyon+ve+Yonetim+Sistemi)
+![Proje Görseli]((https://github.com/emrekeskiner/HotelierProject/blob/master/Frontend/HotelierProject.WebUI/assets/1.png))
 
 ---
 
